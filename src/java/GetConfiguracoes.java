@@ -17,7 +17,7 @@ import view.GerarJson;
  *
  * @author rafael.recalcatti
  */
-@WebServlet(urlPatterns = {"/getPartida"})
+@WebServlet(urlPatterns = {"/getConfiguracao"})
 public class GetConfiguracoes extends HttpServlet {
 
     /**
@@ -35,7 +35,7 @@ public class GetConfiguracoes extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             GerarJson gj = new GerarJson();
-            out.println(gj.getJson());
+            out.println(gj.getConfiguracao());
         }
     }
 

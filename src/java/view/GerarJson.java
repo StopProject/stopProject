@@ -6,6 +6,7 @@
 package view;
 
 import com.google.gson.Gson;
+import controller.Configuracao;
 import controller.Jogador;
 import controller.Partida;
 import controller.Rodada;
@@ -20,7 +21,7 @@ import java.util.List;
  */
 public class GerarJson {
 
-public String getJson()
+public String getPartida()
         {
         Jogador jogador1 = new Jogador("RAFAEL");
         Jogador jogador2 = new Jogador("JOAO");              
@@ -39,7 +40,16 @@ public String getJson()
         
         return json;
 
-
    
    }
+
+    public String getConfiguracao() {
+       
+        
+        Gson gson = new Gson();
+        Configuracao configuracao = new Configuracao();        
+        String json = gson.toJson(configuracao);        
+        return json;
+        
+    }
 }
