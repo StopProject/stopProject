@@ -52,6 +52,7 @@ public class Configuracao {
     private int limiteTempo;
     private int qtdRodadas;
     
+    
     public Configuracao()
     {
         minJogadores = 2;
