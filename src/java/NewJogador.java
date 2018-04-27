@@ -5,6 +5,8 @@
  */
 
 import controller.Configuracao;
+import controller.Jogador;
+import controller.Partida;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -18,8 +20,8 @@ import view.GerarJson;
  *
  * @author rafael.recalcatti
  */
-@WebServlet(urlPatterns = {"/getConfiguracoes"})
-public class GetConfiguracoes extends HttpServlet {
+@WebServlet(name = "newJogador", urlPatterns = {"/newJogador"})
+public class NewJogador extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,11 +34,14 @@ public class GetConfiguracoes extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/JSON;charset=UTF-8");
+        response.setContentType("text/json;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+           
+           
+            Jogador jogador = new Jogador( request.getParameter("nome"));
+            Partida.getIntance().adicionarJogador(jogador);
             GerarJson gj = new GerarJson();
-            out.println(gj.getJson(new Configuracao()));
+            out.println(gj.getJson(jogador));
         }
     }
 

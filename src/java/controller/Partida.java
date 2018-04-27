@@ -4,25 +4,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class Partida {
-    
-    private final boolean emCurso = true;
-    private final List<Rodada> rodadas1;  
 
-    public Partida(Rodada rodada) {
-        
-   
-        rodadas1 = new ArrayList();
-        adicionarRodada(rodada);
+    private boolean emCurso = true;
+    private List<Rodada> rodadas;
+    private static Partida partida;
+    private List<Jogador> jogadores;
+
+    public static Partida getIntance() {
+      
+        if (partida == null) {
+            
+            partida = new Partida();
+        }
+        return partida;
     }
+
+    public void adicionarJogador(Jogador jogador) {
+        jogadores.add(jogador);
+    }
+    
+    private Partida() {           
+        rodadas = new ArrayList(); 
+        jogadores = new ArrayList(); 
+    }
+    
+    
     
     public void adicionarRodada(Rodada rodada) {
-        rodadas1.add(rodada);
+        rodadas.add(rodada);
     }
     
-    public void listarRodada() {
-        this.rodadas1.stream().forEach((rodada) -> {
-            rodada.listarJogadores();
-        });
-    }
+  
+    //public void listarJogadores() {
+
+       // this.jogadores.stream().forEach((s) -> {
+       //     System.out.println(s.getNome());
+      //  });
+   // }
     
 }

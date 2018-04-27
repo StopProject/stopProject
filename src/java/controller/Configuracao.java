@@ -5,6 +5,8 @@
  */
 package controller;
 
+import com.sun.javafx.scene.control.skin.VirtualFlow;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,8 +15,28 @@ import java.util.List;
  */
 public class Configuracao {
     
+    
     private List<String> categorias;
-
+    private int minJogadores;
+    private int maxJogadores;
+    private int limiteTempo;
+    private int qtdRodadas;
+    
+    
+    public Configuracao()
+    {
+        minJogadores = 2;
+        maxJogadores = 5;
+        limiteTempo = 60;
+        qtdRodadas =  10;
+        categorias = new ArrayList<>();
+        categorias.add("Nome");
+        categorias.add("CEP");
+        categorias.add("Fruta");
+        categorias.add("Carro");
+        categorias.add("Cor");
+    }
+    
     public List<String> getCategorias() {
         return categorias;
     }
@@ -47,19 +69,5 @@ public class Configuracao {
         this.qtdRodadas = qtdRodadas;
     }
     
-    private int minJogadores;
-    private int maxJogadores;
-    private int limiteTempo;
-    private int qtdRodadas;
-    
-    
-    public Configuracao()
-    {
-        minJogadores = 2;
-        maxJogadores = 5;
-        limiteTempo = 60;
-        qtdRodadas =  10;
-        
-    }
     
 }
