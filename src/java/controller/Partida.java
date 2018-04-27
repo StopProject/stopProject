@@ -11,35 +11,38 @@ public final class Partida {
     private List<Jogador> jogadores;
 
     public static Partida getIntance() {
-      
-        if (partida == null) {
-            
+
+        if (partida==null) {
+
             partida = new Partida();
         }
         return partida;
     }
 
     public void adicionarJogador(Jogador jogador) {
-        jogadores.add(jogador);
+
+        getJogadores().add(jogador);
+
     }
-    
-    private Partida() {           
-        rodadas = new ArrayList(); 
-        jogadores = new ArrayList(); 
+
+    private Partida() {
+        rodadas = new ArrayList();
+        jogadores = new ArrayList();
     }
-    
-    
-    
+
     public void adicionarRodada(Rodada rodada) {
         rodadas.add(rodada);
     }
-    
-  
-    //public void listarJogadores() {
 
-       // this.jogadores.stream().forEach((s) -> {
-       //     System.out.println(s.getNome());
-      //  });
-   // }
-    
+    /**
+     * @return the jogadores
+     */
+    public List<Jogador> getJogadores() {
+        return jogadores;
+    }
+
+    // public boolean validaJogador(String nome) {
+    // for(){
+    //}
+    // }
 }

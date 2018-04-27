@@ -35,13 +35,36 @@ public class NewJogador extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/json;charset=UTF-8");
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Credentials", "true");
+        response.addHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
         try (PrintWriter out = response.getWriter()) {
+
            
            
-            Jogador jogador = new Jogador( request.getParameter("nome"));
-            Partida.getIntance().adicionarJogador(jogador);
+            
+            if(Partida.getIntance().getJogadores().equals(request.getParameter("nome"))){
+           
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet NovoServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>JOGADOR COM O NOME "+request.getParameter("nome")+" JÁ CADASTRADO. TENTE OUTRO NOME</h1>");
+            out.println("</body>");
+            out.println("</html>");
+                
+                 
+            }else{
+            
+            Jogador jogador = new Jogador(request.getParameter("nome"));    
             GerarJson gj = new GerarJson();
+            Partida.getIntance().adicionarJogador(jogador);
             out.println(gj.getJson(jogador));
+            
+            }
+           
         }
     }
 
