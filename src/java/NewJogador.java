@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 
-import controller.Configuracao;
 import controller.Jogador;
 import controller.Partida;
 import java.io.IOException;
@@ -39,16 +38,15 @@ public class NewJogador extends HttpServlet {
         response.addHeader("Access-Control-Allow-Credentials", "true");
         response.addHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
         try (PrintWriter out = response.getWriter()) {
-
            
+                       
+            if(Partida.getIntance().equals(request.getParameter("nome"))){
            
-            
-            if(Partida.getIntance().getJogadores().equals(request.getParameter("nome"))){
-           
+            response.setContentType("text/html;charset=UTF-8");
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet NovoServlet</title>");            
+            out.println("<title>Alerta</title>");            
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>JOGADOR COM O NOME "+request.getParameter("nome")+" JÁ CADASTRADO. TENTE OUTRO NOME</h1>");

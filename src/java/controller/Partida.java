@@ -10,6 +10,8 @@ public final class Partida {
     private static Partida partida;
     private List<Jogador> jogadores;
 
+    
+    
     public static Partida getIntance() {
 
         if (partida==null) {
@@ -41,8 +43,8 @@ public final class Partida {
         return jogadores;
     }
 
-    // public boolean validaJogador(String nome) {
-    // for(){
-    //}
-    // }
+    public boolean equals(String arg) {
+        
+        return jogadores.stream().anyMatch((jogador) -> (jogador.getNome().equals(arg)));
+    }
 }
