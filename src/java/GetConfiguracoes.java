@@ -39,7 +39,7 @@ public class GetConfiguracoes extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             GerarJson gj = new GerarJson();
-            out.println(gj.getJson(new Configuracao()));
+            out.println(gj.getJson(Configuracao.getInstance()));
         }
     }
 

@@ -17,7 +17,7 @@ public String getJson(Object object)
         {                                    
         //1. Convert object to JSON string
         Gson gson = new Gson();
-        String json = gson.toJson(object);        
+        String json = gson.toJson(object);       
         return json;
  
    }

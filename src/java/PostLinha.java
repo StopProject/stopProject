@@ -4,23 +4,22 @@
  * and open the template in the editor.
  */
 
-import controller.Jogador;
-import controller.Partida;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import view.GerarJson;
 
 /**
  *
  * @author rafael.recalcatti
  */
-@WebServlet(name = "newJogador", urlPatterns = {"/newJogador"})
-public class NewJogador extends HttpServlet {
+@WebServlet(urlPatterns = {"/PostLinha"}, initParams = {
+    @WebInitParam(name = "linha", value = "")})
+public class PostLinha extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,20 +38,8 @@ public class NewJogador extends HttpServlet {
         response.addHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
         try (PrintWriter out = response.getWriter()) {
            
-                       
-            if(Partida.getIntance().equals(request.getParameter("nome"))){
-           
-            out.println("{}");               
-                 
-            }else{
+         request.getParameter("linha");
             
-            Jogador jogador = new Jogador(request.getParameter("nome"));    
-            GerarJson gj = new GerarJson();
-            Partida.getIntance().adicionarJogador(jogador);
-            out.println(gj.getJson(jogador));
-            
-            }
-           
         }
     }
 

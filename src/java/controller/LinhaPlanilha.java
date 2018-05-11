@@ -1,26 +1,20 @@
 package controller;
 
 
-public class LinhaPlanilha extends Jogador{
+public class LinhaPlanilha{
 	
-	public LinhaPlanilha(String nome) {
-		super(nome);
-		
-	}
-
-	private String repostas;
+	
+	private String[] repostas;
 	private int pontuacao;
 	private boolean jogando = true;
-	
-	
-	public String getRepostas() {
-		return repostas;
-	}
-	
-	public void setRepostas(String resposta){
-		this.repostas = resposta;
-	}
-	
+        private Jogador jogador;
+		
+	public LinhaPlanilha(Jogador jogador ){
+            
+            this.jogador = jogador;
+            this.repostas = new String[Configuracao.getInstance().getCategorias().size()];
+        }
+        
 	public int getPontuacao() {
 		return pontuacao;
 	}
@@ -36,5 +30,19 @@ public class LinhaPlanilha extends Jogador{
 	public void setJogando(){
 		this.jogando = false;
 	}
+
+    /**
+     * @return the repostas
+     */
+    public String[] getRepostas() {
+        return repostas;
+    }
+
+    /**
+     * @param repostas the repostas to set
+     */
+    public void setRepostas(String[] repostas) {
+        this.repostas = repostas;
+    }
 
 }

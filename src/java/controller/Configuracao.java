@@ -21,9 +21,10 @@ public class Configuracao {
     private int maxJogadores;
     private int limiteTempo;
     private int qtdRodadas;
+    private static Configuracao configuracao; 
     
     
-    public Configuracao()
+    private Configuracao()
     {
         minJogadores = 2;
         maxJogadores = 5;
@@ -35,6 +36,15 @@ public class Configuracao {
         categorias.add("Fruta");
         categorias.add("Carro");
         categorias.add("Cor");
+    }
+    
+    public static Configuracao getInstance(){
+        
+        if (configuracao == null) {
+
+            configuracao = new Configuracao();
+        }
+        return configuracao;
     }
     
     public List<String> getCategorias() {

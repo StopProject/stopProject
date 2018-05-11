@@ -12,9 +12,9 @@ public final class Partida {
 
     
     
-    public static Partida getIntance() {
+    public static Partida getIntance(){
 
-        if (partida==null) {
+        if (partida == null) {
 
             partida = new Partida();
         }
@@ -24,9 +24,12 @@ public final class Partida {
     public void adicionarJogador(Jogador jogador) {
 
         getJogadores().add(jogador);
-
+        if(jogadores.size() >= Configuracao.getInstance().getMinJogadores()){
+            rodadas.add(new Rodada('A', jogadores, 0));
+        }
+        
     }
-
+      
     private Partida() {
         rodadas = new ArrayList();
         jogadores = new ArrayList();
@@ -43,8 +46,7 @@ public final class Partida {
         return jogadores;
     }
 
-    public boolean equals(String arg) {
-        
+    public boolean equals(String arg) {        
         return jogadores.stream().anyMatch((jogador) -> (jogador.getNome().equals(arg)));
     }
 }
