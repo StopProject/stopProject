@@ -40,10 +40,10 @@ public class WebSocket {
         }
          if (message.contains("newRodada")) {
             GerarJson gj = new GerarJson();
-            
             String ret = "{\"funcao\":\"newRodada\",\"valor\": " + gj.getJson(Partida.getIntance().adicionarRodada('S')) + "}";
-            sendMessage(ret);
-
+            for (Session session1 : Configuracao.sessoes.values()) {
+                session1.getAsyncRemote().sendText(ret);
+            }
         }
 
     }
