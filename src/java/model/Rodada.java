@@ -1,5 +1,6 @@
-package controller;
+package model;
 
+import controller.LinhaPlanilha;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +14,9 @@ public final class Rodada {
         this.letra = letra;
         linhaPlanilha = new ArrayList<>();
         
-        for(Jogador jogador : jogadores){
-          linhaPlanilha.add(new LinhaPlanilha(jogador));  
-        }
+        jogadores.stream().forEach((jogador) -> {
+            linhaPlanilha.add(new LinhaPlanilha(jogador));
+        });
         
             
     }

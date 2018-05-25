@@ -1,5 +1,7 @@
-package controller;
+package model;
 
+import controller.Configuracao;
+import model.Jogador;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,8 +37,10 @@ public final class Partida {
         jogadores = new ArrayList();
     }
 
-    public void adicionarRodada(Rodada rodada) {
-        rodadas.add(rodada);
+    public Rodada adicionarRodada(char letra) {
+        Rodada ret = new Rodada(letra, jogadores, Configuracao.getInstance().getQtdRodadas());
+        rodadas.add(ret);
+        return ret;
     }
 
     /**

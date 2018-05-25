@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 
-import controller.Jogador;
-import controller.Partida;
+import model.Jogador;
+import model.Partida;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;

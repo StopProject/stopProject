@@ -7,7 +7,10 @@ package controller;
 
 import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import javax.websocket.Session;
 
 /**
  *
@@ -21,7 +24,8 @@ public class Configuracao {
     private int maxJogadores;
     private int limiteTempo;
     private int qtdRodadas;
-    private static Configuracao configuracao; 
+    private static Configuracao configuracao;
+    public static Map<String,Session> sessoes = new HashMap<String, Session>();
     
     
     private Configuracao()
