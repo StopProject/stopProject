@@ -42,7 +42,9 @@ public class WebSocket {
             GerarJson gj = new GerarJson();
             String ret = "{\"funcao\":\"newRodada\",\"valor\": " + gj.getJson(Partida.getIntance().adicionarRodada('S')) + "}";
             for (Session session1 : Configuracao.sessoes.values()) {
-                session1.getAsyncRemote().sendText(ret);
+                try {
+                    session1.getAsyncRemote().sendText(ret);
+                } catch(Exception e) {}
             }
         }
 
@@ -77,7 +79,9 @@ public class WebSocket {
             for (Session session1 : Configuracao.sessoes.values()) {
 
                 ret = "{\"funcao\":\"getPartida\",\"valor\": " + gj.getJson(Partida.getIntance()) + "}";
+                try {
                 session1.getAsyncRemote().sendText(ret);
+                } catch(Exception e) {}
 
             }
         }
