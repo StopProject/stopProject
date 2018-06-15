@@ -5,7 +5,10 @@
  */
 package websockets;
 
+import com.google.gson.Gson;
 import controller.Configuracao;
+import controller.LinhaPlanilha;
+import java.lang.reflect.Type;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,6 +29,7 @@ import view.GerarJson;
 public class WebSocket {
 
     Session session;
+    Jogador jogador;
 
     @OnMessage
     public void onMessage(String message) {
@@ -34,18 +38,32 @@ public class WebSocket {
 
         if (message.contains("getPartida")) {
             GerarJson gj = new GerarJson();
+
             String ret = "{\"funcao\":\"getPartida\",\"valor\": " + gj.getJson(Partida.getIntance()) + "}";
             sendMessage(ret);
 
         }
-         if (message.contains("newRodada")) {
+        if (message.contains("newRodada")) {
             GerarJson gj = new GerarJson();
+
             String ret = "{\"funcao\":\"newRodada\",\"valor\": " + gj.getJson(Partida.getIntance().adicionarRodada('S')) + "}";
             for (Session session1 : Configuracao.sessoes.values()) {
                 try {
                     session1.getAsyncRemote().sendText(ret);
-                } catch(Exception e) {}
+                } catch (Exception e) {
+                }
             }
+        }
+        if (message.contains("putRespostas")) {
+
+            GerarJson gj = new GerarJson();
+            Retorno data = new Gson().fromJson(message, Retorno.class);
+            
+            Partida.getIntance().getRodadas().get(0).getLinhaPlanilha().get(0).setRepostas(data.valor);
+            
+            String ret = "{\"funcao\":\"getPartida\",\"valor\": " + gj.getJson(Partida.getIntance()) + "}";
+            sendMessage(ret);
+
         }
 
     }
@@ -58,7 +76,7 @@ public class WebSocket {
         //t.start();
 
         String nome = this.session.getRequestParameterMap().get("nome").get(0);
-        Configuracao.sessoes.put(nome, session);        
+        Configuracao.sessoes.put(nome, session);
 
         if (nome.isEmpty() || nome.equals("")) {
 
@@ -80,8 +98,9 @@ public class WebSocket {
 
                 ret = "{\"funcao\":\"getPartida\",\"valor\": " + gj.getJson(Partida.getIntance()) + "}";
                 try {
-                session1.getAsyncRemote().sendText(ret);
-                } catch(Exception e) {}
+                    session1.getAsyncRemote().sendText(ret);
+                } catch (Exception e) {
+                }
 
             }
         }
@@ -103,6 +122,7 @@ class ThreadSend extends Thread {
     }
 
     public void run() {
+
         while (true) {
             //System.out.println("asdasd");    
             sessao.getAsyncRemote().sendText("envio " + Calendar.getInstance().getTime());
@@ -113,4 +133,16 @@ class ThreadSend extends Thread {
             }
         }
     }
+}
+
+class Retorno {
+
+    public String funcao;
+    public String[] valor;
+
+    public Retorno(String funcao, String[] valor) {
+        this.funcao = funcao;
+        this.valor = valor;
+    }
+
 }

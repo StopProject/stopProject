@@ -27,19 +27,20 @@ public final class Partida {
 
         getJogadores().add(jogador);
         if(jogadores.size() >= Configuracao.getInstance().getMinJogadores()){
-            rodadas.add(new Rodada('A', jogadores, 0));
+            getRodadas().add(new Rodada('A', jogadores, 0));
         }
         
     }
       
     private Partida() {
+        
         rodadas = new ArrayList();
         jogadores = new ArrayList();
     }
 
     public Rodada adicionarRodada(char letra) {
         Rodada ret = new Rodada(letra, jogadores, Configuracao.getInstance().getQtdRodadas());
-        rodadas.add(ret);
+        getRodadas().add(ret);
         return ret;
     }
 
@@ -49,8 +50,23 @@ public final class Partida {
     public List<Jogador> getJogadores() {
         return jogadores;
     }
+    
 
     public boolean equals(String arg) {        
         return jogadores.stream().anyMatch((jogador) -> (jogador.getNome().equals(arg)));
+    }
+
+    /**
+     * @return the rodadas
+     */
+    public List<Rodada> getRodadas() {     
+        return rodadas;
+    }
+
+    /**
+     * @param rodadas the rodadas to set
+     */
+    public void setRodadas(List<Rodada> rodadas) {
+        this.rodadas = rodadas;
     }
 }

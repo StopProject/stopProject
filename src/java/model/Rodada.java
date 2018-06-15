@@ -21,8 +21,10 @@ public final class Rodada {
             
     }
        
-   public void addLinhaPlanilha(){
+   public void addLinhaPlanilha(LinhaPlanilha linhaPlanilha){
        
+       this.linhaPlanilha.add(linhaPlanilha);
+      
     }
     
     public void setLetra(char letra) {
@@ -35,6 +37,20 @@ public final class Rodada {
 
     public void isJogando() {
         //partida.isEmCurso();
+    }
+
+    /**
+     * @return the linhaPlanilha
+     */
+    public List<LinhaPlanilha> getLinhaPlanilha() {
+        return linhaPlanilha;
+    }
+
+    /**
+     * @param linhaPlanilha the linhaPlanilha to set
+     */
+    public void setLinhaPlanilha(List<LinhaPlanilha> linhaPlanilha) {
+        this.linhaPlanilha = linhaPlanilha;
     }
 
 }

@@ -11,7 +11,7 @@ public class LinhaPlanilha{
 	private boolean jogando = true;
         private Jogador jogador;
 		
-	public LinhaPlanilha(Jogador jogador ){
+	public LinhaPlanilha(Jogador jogador){
             
             this.jogador = jogador;
             this.repostas = new String[Configuracao.getInstance().getCategorias().size()];
