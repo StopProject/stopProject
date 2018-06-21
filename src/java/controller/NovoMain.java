@@ -31,13 +31,4 @@ public class NovoMain {
     }
     
 }
-class Retorno{
- public String funcao;
- public String[] valor;
 
-    public Retorno(String funcao, String[] valor) {
-        this.funcao = funcao;
-        this.valor = valor;
-    }
- 
-}
