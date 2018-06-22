@@ -18,7 +18,7 @@ import websockets.WebSocket;
  */
 public class StopController {
 
-    public String getMessage(String message) {
+    public String getMessage(websockets.WebSocket websocket, String message) {
 
         System.out.println(message.getClass() + " " + message);
 
@@ -28,21 +28,28 @@ public class StopController {
             return "{\"funcao\":\"getPartida\",\"valor\": " + gj.getJson(Partida.getIntance()) + "}";
 
         } else {
+            
             if (message.contains("newRodada")) {
 
                 GerarJson gj = new GerarJson();
 
-                for (Session session1 : Configuracao.sessoes.values()) {
+                for (websockets.WebSocket session1 : Configuracao.sessoes.values()) {
                     try {
                         return "{\"funcao\":\"newRodada\",\"valor\": " + gj.getJson(Partida.getIntance().adicionarRodada('S')) + "}";
                     } catch (Exception e) {
                         return "{\"funcao\":\"erro\",\"valor\":{\"codigo\":2, \"message\":\"ERRO INTERNO\"}}";
                     }
+                    
                 }
             } else if (message.contains("putRespostas")) {
 
                 GerarJson gj = new GerarJson();
                 Retorno data = new Gson().fromJson(message, Retorno.class);
+                               
+                for(int i = 0 ; i < Partida.getIntance().getRodadas().size(); i++){
+                    
+                    System.err.println("::"+Partida.getIntance().getJogadores()); 
+                }
                 Partida.getIntance().getRodadas().get(0).getLinhaPlanilha().get(0).setRepostas(data.valor);
                 return "{\"funcao\":\"getPartida\",\"valor\": " + gj.getJson(Partida.getIntance()) + "}";
 
@@ -54,10 +61,10 @@ public class StopController {
 
     }
     
-    public String setOpen(Session session){
+    public String setOpen(websockets.WebSocket session){
               
      
-        String nome = session.getRequestParameterMap().get("nome").get(0);
+        String nome = session.session.getRequestParameterMap().get("nome").get(0);
         Configuracao.sessoes.put(nome, session);
 
         if (nome.isEmpty() || nome.equals("")) {

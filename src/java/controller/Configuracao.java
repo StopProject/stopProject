@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.websocket.Session;
+import websockets.WebSocket;
 
 /**
  *
@@ -24,7 +25,7 @@ public class Configuracao {
     private int limiteTempo;
     private int qtdRodadas;
     private static Configuracao configuracao;
-    public static Map<String,Session> sessoes = new HashMap<String, Session>();
+    public static Map<String,websockets.WebSocket> sessoes = new HashMap<String, WebSocket>();
     
     
     private Configuracao()

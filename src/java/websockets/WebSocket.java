@@ -29,19 +29,19 @@ import view.GerarJson;
 @ServerEndpoint("/websocket")
 public class WebSocket {
 
-    Session session;
-    Jogador jogador;
+    public Session session;
+    public Jogador jogador;
 
     @OnMessage
     public void onMessage(String message) {
         
-        sendMessage(new StopController().getMessage(message));      
+        sendMessage(new StopController().getMessage(this, message));      
     }
 
     @OnOpen
     public void onOpen(Session session) {       
-        
-        sendMessage(new StopController().setOpen(session));         
+        this.session = session;
+        sendMessage(new StopController().setOpen(this));         
     }
 
     public void sendMessage(String m) {
