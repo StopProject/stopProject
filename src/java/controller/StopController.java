@@ -20,7 +20,7 @@ public class StopController {
 
     public String getMessage(websockets.WebSocket websocket, String message) {
 
-        System.out.println(message.getClass() + " " + message);
+        System.out.println("EXIT::"+message.getClass() + " " + message);
 
         if (message.contains("getPartida")) {
 
@@ -46,16 +46,20 @@ public class StopController {
                 GerarJson gj = new GerarJson();
                 Retorno data = new Gson().fromJson(message, Retorno.class);
                                
-                for(int i = 0 ; i < Partida.getIntance().getRodadas().size(); i++){
+                for(int i = 0 ; i < Partida.getIntance().getJogadores().size(); i++){
                     
-                    System.err.println("::"+Partida.getIntance().getJogadores()); 
+                    System.err.println("EXIT:: QTD JOGADORES:"+Partida.getIntance().getJogadores().size()); 
+                    System.err.println("EXIT NOME JOGADOR::"+Partida.getIntance().getJogadores().get(i).getNome());
+                    System.err.println("EXIT:: QTD SESSAO:"+Configuracao.sessoes.values().size());
+                    System.err.println("EXIT:: DONO SESSAO:"+Configuracao.sessoes.get("Jogador 2")); 
+                    
                 }
-                Partida.getIntance().getRodadas().get(0).getLinhaPlanilha().get(0).setRepostas(data.valor);
+                //Partida.getIntance().getRodadas().get(0).getLinhaPlanilha().get(0).setRepostas(data.valor);
                 return "{\"funcao\":\"getPartida\",\"valor\": " + gj.getJson(Partida.getIntance()) + "}";
 
             }
 
-            return "{\"funcao\":\"erro\",\"valor\":{\"codigo\":2, \"message\":\"ERRO INTERNO\"}}";
+                return "{\"funcao\":\"erro\",\"valor\":{\"codigo\":2, \"message\":\"ERRO INTERNO\"}}";
 
         }
 
