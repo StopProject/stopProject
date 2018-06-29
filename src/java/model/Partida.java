@@ -1,13 +1,13 @@
 package model;
 
 import controller.Configuracao;
-import model.Jogador;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public final class Partida {
 
-    private boolean emCurso = true;
+    private boolean emCurso = false;
     private List<Rodada> rodadas;
     private static Partida partida;
     private List<Jogador> jogadores;
@@ -25,9 +25,19 @@ public final class Partida {
 
     public void adicionarJogador(Jogador jogador) {
 
+        
+        char letras[] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','X','W','Y','Z'};
+        
+        
         getJogadores().add(jogador);
         if(jogadores.size() >= Configuracao.getInstance().getMinJogadores()){
-            getRodadas().add(new Rodada('A', jogadores, 0));
+            
+            if(!isEmCurso()){                 
+                  char letraRodada = letras[new Random().nextInt(25)];               
+                  getRodadas().add(new Rodada(letraRodada, jogadores, 0));
+                  setEmCurso(true);
+            }
+                      
         }
         
     }
@@ -67,6 +77,21 @@ public final class Partida {
      * @param rodadas the rodadas to set
      */
     public void setRodadas(List<Rodada> rodadas) {
+        
         this.rodadas = rodadas;
+    }
+
+    /**
+     * @return the emCurso
+     */
+    public boolean isEmCurso() {
+        return emCurso;
+    }
+
+    /**
+     * @param emCurso the emCurso to set
+     */
+    public void setEmCurso(boolean emCurso) {
+        this.emCurso = emCurso;
     }
 }

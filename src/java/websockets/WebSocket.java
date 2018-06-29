@@ -33,8 +33,7 @@ public class WebSocket {
     public Jogador jogador;
 
     @OnMessage
-    public void onMessage(String message) {
-        
+    public void onMessage(String message) {       
         sendMessage(new StopController().getMessage(this, message));      
     }
 

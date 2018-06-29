@@ -6,12 +6,12 @@ import java.util.List;
 
 public final class Rodada {
 
-    private char letra;
+    private char letra; 
     private List<LinhaPlanilha> linhaPlanilha;
 
     public Rodada(char letra, List<Jogador> jogadores, int qtdCategorias) {
         
-        this.letra = letra;
+        this.letra = letra;        
         linhaPlanilha = new ArrayList<>();
         
         jogadores.stream().forEach((jogador) -> {
@@ -52,5 +52,6 @@ public final class Rodada {
     public void setLinhaPlanilha(List<LinhaPlanilha> linhaPlanilha) {
         this.linhaPlanilha = linhaPlanilha;
     }
+    
 
 }

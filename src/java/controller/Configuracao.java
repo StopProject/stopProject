@@ -25,7 +25,7 @@ public class Configuracao {
     private int limiteTempo;
     private int qtdRodadas;
     private static Configuracao configuracao;
-    public static Map<String,websockets.WebSocket> sessoes = new HashMap<String, WebSocket>();
+    public static Map<String,websockets.WebSocket> sessoes = new HashMap<>();
     
     
     private Configuracao()
