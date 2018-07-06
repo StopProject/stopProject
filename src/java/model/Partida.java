@@ -30,10 +30,12 @@ public final class Partida {
         
         
         getJogadores().add(jogador);
+        
         if(jogadores.size() >= Configuracao.getInstance().getMinJogadores()){
             
-            if(!isEmCurso()){                 
-                  char letraRodada = letras[new Random().nextInt(25)];               
+            if(!isEmCurso()){  
+                
+                  char letraRodada = letras[0];//new Random().nextInt(25)];               
                   getRodadas().add(new Rodada(letraRodada, jogadores, 0));
                   setEmCurso(true);
             }
@@ -48,7 +50,8 @@ public final class Partida {
         jogadores = new ArrayList();
     }
 
-    public Rodada adicionarRodada(char letra) {
+    public Rodada adicionarRodada(char letra) {      
+        
         Rodada ret = new Rodada(letra, jogadores, Configuracao.getInstance().getQtdRodadas());
         getRodadas().add(ret);
         return ret;
@@ -62,7 +65,8 @@ public final class Partida {
     }
     
 
-    public boolean equals(String arg) {        
+    public boolean equals(String arg) {     
+        
         return jogadores.stream().anyMatch((jogador) -> (jogador.getNome().equals(arg)));
     }
 

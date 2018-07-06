@@ -1,14 +1,15 @@
 package controller;
 
+import java.util.Observable;
 import model.Jogador;
 
 
-public class LinhaPlanilha{
+public class LinhaPlanilha extends Observable{
 	
 	
 	private String[] repostas;
 	private int pontuacao;
-	private boolean jogando = true;
+	private boolean jogando = false;
         private Jogador jogador;
 		
 	public LinhaPlanilha(Jogador jogador){
@@ -42,9 +43,41 @@ public class LinhaPlanilha{
 
     /**
      * @param repostas the repostas to set
+     * @param letra
      */
-    public void setRepostas(String[] repostas) {
+    public synchronized void setRepostas(String[] repostas, char letra) {
+        
         this.repostas = repostas;
+        if(this.validaRespostas(letra)){
+            this.jogando = false;            
+            this.setChanged();
+            this.notifyObservers();
+        }
     }
+
+    private boolean validaRespostas(char letra) {
+      
+        int count = 0;
+        boolean _ret = false;
+        try {
+            
+            for (String reposta : this.repostas) {
+                
+                if (reposta != null && reposta.charAt(0) == letra && !reposta.isEmpty()) {                    
+                    this.pontuacao += 10;
+                    count++;
+                }
+            }
+            _ret = count == 5;
+            
+        } catch (Exception ex) {
+            
+                _ret = false;
+        }
+        return _ret;
+        
+    }
+    
+   
 
 }

@@ -34,13 +34,13 @@ public class WebSocket {
 
     @OnMessage
     public void onMessage(String message) {       
-        sendMessage(new StopController().getMessage(this, message));      
+        sendMessage(StopController.GetInstance().getMessage(this, message));      
     }
 
     @OnOpen
     public void onOpen(Session session) {       
         this.session = session;
-        sendMessage(new StopController().setOpen(this));         
+        sendMessage(StopController.GetInstance().setOpen(this));         
     }
 
     public void sendMessage(String m) {
