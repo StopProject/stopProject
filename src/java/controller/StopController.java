@@ -14,6 +14,7 @@ import model.Partida;
 import model.Rodada;
 import sun.security.jca.GetInstance;
 import view.GerarJson;
+import websockets.WebSocket;
 
 /**
  *
@@ -34,6 +35,15 @@ public class StopController implements Observer {
         return instancia;
     }
 
+    public void paraTudo() {
+        GerarJson gj = new GerarJson();
+        String msg = "{\"funcao\":\"getPartida\",\"valor\": " + gj.getJson(Partida.getIntance()) + "}"; 
+        for (WebSocket ws : Configuracao.sessoes.values()) {
+            try {
+                ws.sendMessage(msg);
+            } catch (Exception e) {}
+        }
+    }
     public String getMessage(websockets.WebSocket websocket, String message) {
 
         String _return = null;
@@ -128,8 +138,14 @@ public class StopController implements Observer {
 
         Partida.getIntance().getRodadas().get(Partida.getIntance().getRodadas().size() - 1).setEmCurso(false);
         System.out.println("->STOP::::" + o);
+    
+        String msg =  "{\"funcao\":\"erro\",\"valor\":{\"codigo\":3, \"message\":\"RODADA FINALIZADA\"}}";
+        for (WebSocket ws : Configuracao.sessoes.values()) {
+            try {
+                ws.sendMessage(msg);
+            } catch (Exception e) {}
+        }
     }
-
 }
 
 class Retorno {
