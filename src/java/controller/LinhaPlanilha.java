@@ -48,9 +48,12 @@ public class LinhaPlanilha extends Observable{
     public synchronized void setRepostas(String[] repostas, char letra) {
         
         this.repostas = repostas;
-        if(this.validaRespostas(letra)){
+        //if(this.validaRespostas(letra)){
+        if(this.repostas[0] != null &&this.repostas[1] != null &&this.repostas[2] != null &&
+                this.repostas[3] != null &&this.repostas[4] != null){
             this.jogando = false;            
             this.setChanged();
+            System.out.println("notificando");
             this.notifyObservers();
         }
     }

@@ -1,6 +1,7 @@
 package model;
 
 import controller.Configuracao;
+import controller.StopController;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -38,6 +39,7 @@ public final class Partida {
                   char letraRodada = letras[0];//new Random().nextInt(25)];               
                   getRodadas().add(new Rodada(letraRodada, jogadores, 0));
                   setEmCurso(true);
+            } else {
             }
                       
         }

@@ -14,19 +14,22 @@ and open the template in the editor.
         <div>TODO write content</div>
         <input id="nome"/> <button onclick="logar()">Login</button>
         <button onclick="putResp()">put resp</button>
+        <button onclick="putRespostas()">put respostas</button>
         
         <script>
             var socket;
             function logar() {        
-                socket= new WebSocket("ws://172.29.80.15:8080/StopWeb/websocket?nome="+document.getElementById("nome").value);
+                socket= new WebSocket("ws://172.29.80.15:8080/stopProject/websocket?nome="+document.getElementById("nome").value);
                 socket.onmessage = function(msg) {
-                   console.log(msg.data);
                    console.log(JSON.stringify(msg.data));
                    
                 }
             }
             function putResp() {
-                socket.send("{\"funcao\":\"putRespostas\",\"valor\":[\"\",\"FTEC\",\"\",\"Dalessandro\", \"\"]}");
+                socket.send("{\"funcao\":\"putRespostas\",\"valor\":[\"aviao\",null,null,null,null]}");
+            }
+            function putRespostas() {
+                socket.send("{\"funcao\":\"putRespostas\",\"valor\":[\"aviao\",\"aaaaa\",\"aaaaa\",\"aaaaa\",\"aaaaa\"]}");
             }
             </script>
             

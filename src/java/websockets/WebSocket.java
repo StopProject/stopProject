@@ -33,14 +33,28 @@ public class WebSocket {
     public Jogador jogador;
 
     @OnMessage
-    public void onMessage(String message) {       
+    public void onMessage(String message) {
+        if (message.contains("putResposta")) {
+            String msg = StopController.GetInstance().getMessage(this, message);
+        for (WebSocket ws : Configuracao.sessoes.values()) {
+            try {
+                ws.sendMessage(msg);
+            } catch (Exception e) {}
+        }    
+        } else {
         sendMessage(StopController.GetInstance().getMessage(this, message));      
+        }
     }
 
     @OnOpen
     public void onOpen(Session session) {       
         this.session = session;
-        sendMessage(StopController.GetInstance().setOpen(this));         
+        String msg = (StopController.GetInstance().setOpen(this)); 
+        for (WebSocket ws : Configuracao.sessoes.values()) {
+            try {
+                ws.sendMessage(msg);
+            } catch (Exception e) {}
+        }
     }
 
     public void sendMessage(String m) {

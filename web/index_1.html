@@ -18,7 +18,7 @@ and open the template in the editor.
         <script>
             var socket;
             function logar() {        
-                socket= new WebSocket("ws://172.29.80.15:8080/StopWeb/websocket?nome="+document.getElementById("nome").value);
+                socket= new WebSocket("ws://172.29.80.15:8080/stopProject/websocket?nome="+document.getElementById("nome").value);
                 socket.onmessage = function(msg) {
                    console.log(msg.data);
                    console.log(JSON.stringify(msg.data));
